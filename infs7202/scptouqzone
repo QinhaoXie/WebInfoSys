@@ -1,0 +1,1 @@
+scp $1  s4733491@infs3202-942629ae.zones.eait.uq.edu.au:/var/www/htdocs/$2
