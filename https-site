@@ -43,7 +43,7 @@ server {
         }
 
 
-	location /lara {
+	location /lara/ {
 			proxy_pass http://test1/;
 		}
 }
