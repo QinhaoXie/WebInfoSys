@@ -1,0 +1,5 @@
+REMINDERS:     
+* Node.js applications should listen on localhost port 8081
+* Place your project in /var/www/nodejs
+* node will load app.js in that directory -- to change this edit /etc/systemd/system/nodejs.service                                                                    
+Further instructions available at: https://help.eait.uq.edu.au/smartos/webproject
