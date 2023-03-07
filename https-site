@@ -47,3 +47,7 @@ server {
 			proxy_pass http://test1/;
 		}
 }
+upstream test1{
+	server 127.0.0.1:8000;
+}
+	

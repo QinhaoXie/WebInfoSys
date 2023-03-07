@@ -13,6 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
+
+Route::get('/', function () {
+	return 'Hello World';
+});
+
+Route::get('/getuser', function () {
+	return 'Hello World';
+});
+use App\Http\Controllers\UserController;
+ 
+Route::get('/user/{id}', [UserController::class, 'show']);
+
+
+
+
+
+
