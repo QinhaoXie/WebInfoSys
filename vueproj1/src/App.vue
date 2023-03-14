@@ -1,13 +1,15 @@
 <template>
   <div id="app">
+    <MainpageHeader/>
     <!-- <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </nav> -->
     <router-view/>
+
   </div>
 </template>
-
+<!-- 
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -29,4 +31,25 @@ nav {
     }
   }
 }
-</style>
+</style> -->
+<script>
+
+import MainpageHeader from '@/components/MainpageHeader';
+// import MainpageFooter from '@/components/MainpageFooter';
+export default {
+  name: 'App',
+
+  components: {
+    MainpageHeader,
+    // MainpageFooter,
+    // HelloWorld,
+  },
+
+  
+  data: () => ({
+    drawer: false,
+
+    }),
+
+};
+</script>

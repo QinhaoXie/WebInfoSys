@@ -1,9 +1,9 @@
 <template>
-  <v-app>
+  <v-container>
  <!-- <v-app-bar> -->
-      <!-- <template> -->
         <!-- <v-card class="overflow-hidden"> -->
           <v-app-bar
+          class="overflow-hidden"
             absolute
             color="#6A76AB"
             dark
@@ -25,7 +25,7 @@
             <v-app-bar-title>Online Learning</v-app-bar-title>
       
             <v-spacer></v-spacer>
-      
+            
             <v-btn icon>
               <v-icon>mdi-magnify</v-icon>
             </v-btn>
@@ -37,25 +37,27 @@
             <v-btn icon>
               <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
-      
+            <router-link to="/login">
+              <v-btn plain x-large>
+              Login
+            </v-btn>
+          </router-link>
+            
             <template v-slot:extension>
               <v-tabs align-with-title>
-                <v-tab>Home Page</v-tab>
-                <v-tab>Tab 2</v-tab>
+                <v-tab>Find Courses</v-tab>
+                <v-tab>My Courses</v-tab>
                 <v-tab>Tab 3</v-tab>
               </v-tabs>
             </template>
           </v-app-bar>
-          <v-sheet 
-            id="scrolling-techniques-3"
-            class="overflow-y-auto"
-            max-height="1000"
-          >
-            <v-container style="height: 1000px;"></v-container>
-          </v-sheet>
+
+
+
+                                    
         <!-- </v-card> -->
-      <!-- </template> -->
-                      <v-navigation-drawer
+
+          <!-- <v-navigation-drawer
             v-model="drawer"
             absolute
             bottom
@@ -105,42 +107,42 @@
               </v-list-item>
             </v-list-item-group>
           </v-list>
-          </v-navigation-drawer>
-  </v-app>
+          </v-navigation-drawer> -->
+  </v-container>
    
 
   </template>
   
   <script>
-  // import HelloWorld from './components/HelloWorld';
+
   
   export default {
     name: 'MainpageHeader',
   
     components: {
-      // HelloWorld,
+
     },
   
     data: () => ({
-      selectedItem: 0,
-      items: [
-        { text: 'My Files', icon: 'mdi-folder' },
-        { text: 'Shared with me', icon: 'mdi-account-multiple' },
-        { text: 'Starred', icon: 'mdi-star' },
-        { text: 'Recent', icon: 'mdi-history' },
-        { text: 'Offline', icon: 'mdi-check-circle' },
-        { text: 'Uploads', icon: 'mdi-upload' },
-        { text: 'Backups', icon: 'mdi-cloud-upload' },
-      ],
-      //
-      drawer: false,
-      group: null,
+      // selectedItem: 0,
+      // items: [
+      //   { text: 'My Files', icon: 'mdi-folder' },
+      //   { text: 'Shared with me', icon: 'mdi-account-multiple' },
+      //   { text: 'Starred', icon: 'mdi-star' },
+      //   { text: 'Recent', icon: 'mdi-history' },
+      //   { text: 'Offline', icon: 'mdi-check-circle' },
+      //   { text: 'Uploads', icon: 'mdi-upload' },
+      //   { text: 'Backups', icon: 'mdi-cloud-upload' },
+      // ],
+      
+      // drawer: false,
+      // group: null,
     }),
-    watch: {
-      group () {
-        this.drawer = false
-      },
-    },
+    // watch: {
+    //   group () {
+    //     this.drawer = false
+    //   },
+    // },
 
   
   }
