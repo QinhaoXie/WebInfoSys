@@ -1,54 +1,32 @@
 <template>
-  <v-app>
-    <MainpageHeader/>
-    <template>
-
-    </template>
-    <v-main>
-    </v-main>
-      <MainpageFooter/>
-  </v-app>
-  
+  <div id="app">
+    <!-- <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </nav> -->
+    <router-view/>
+  </div>
 </template>
 
-<script>
- import MainpageHeader from './components/MainpageHeader';
- import MainpageFooter from './components/MainpageFooter';
-export default {
-  name: 'App',
+<style lang="scss">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
 
-  components: {
-    MainpageHeader,
-    MainpageFooter,
-    // HelloWorld,
-  },
+nav {
+  padding: 30px;
 
-  // data: () => ({
-  //   //
-  // }),
-  data: () => ({
-      selectedItem: 0,
-      items: [
-        { text: 'My Files', icon: 'mdi-folder' },
-        { text: 'Shared with me', icon: 'mdi-account-multiple' },
-        { text: 'Starred', icon: 'mdi-star' },
-        { text: 'Recent', icon: 'mdi-history' },
-        { text: 'Offline', icon: 'mdi-check-circle' },
-        { text: 'Uploads', icon: 'mdi-upload' },
-        { text: 'Backups', icon: 'mdi-cloud-upload' },
-      ],
-      drawer: false,
-      group: null,
-    }),
+  a {
+    font-weight: bold;
+    color: #2c3e50;
 
-
-    // watch: {
-    //   group () {
-    //     this.drawer = false
-    //   },
-    // },
-
-};
-</script>
-
-
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
+</style>

@@ -122,6 +122,7 @@
     },
   
     data: () => ({
+      selectedItem: 0,
       items: [
         { text: 'My Files', icon: 'mdi-folder' },
         { text: 'Shared with me', icon: 'mdi-account-multiple' },
