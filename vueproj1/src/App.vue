@@ -1,60 +1,54 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+    <MainpageHeader/>
+    <template>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
+    </template>
     <v-main>
-      <HelloWorld/>
     </v-main>
+      <MainpageFooter/>
   </v-app>
+  
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
+ import MainpageHeader from './components/MainpageHeader';
+ import MainpageFooter from './components/MainpageFooter';
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    MainpageHeader,
+    MainpageFooter,
+    // HelloWorld,
   },
 
+  // data: () => ({
+  //   //
+  // }),
   data: () => ({
-    //
-  }),
+      selectedItem: 0,
+      items: [
+        { text: 'My Files', icon: 'mdi-folder' },
+        { text: 'Shared with me', icon: 'mdi-account-multiple' },
+        { text: 'Starred', icon: 'mdi-star' },
+        { text: 'Recent', icon: 'mdi-history' },
+        { text: 'Offline', icon: 'mdi-check-circle' },
+        { text: 'Uploads', icon: 'mdi-upload' },
+        { text: 'Backups', icon: 'mdi-cloud-upload' },
+      ],
+      drawer: false,
+      group: null,
+    }),
+
+
+    // watch: {
+    //   group () {
+    //     this.drawer = false
+    //   },
+    // },
+
 };
 </script>
+
+
