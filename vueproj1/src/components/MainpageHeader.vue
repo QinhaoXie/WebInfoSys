@@ -42,6 +42,11 @@
               Login
             </v-btn>
           </router-link>
+          <router-link to="/register">
+            <v-btn plain x-large>
+            Register
+          </v-btn>
+        </router-link>
             
             <template v-slot:extension>
               <v-tabs align-with-title>
