@@ -1,7 +1,7 @@
 <template>
   <v-app class="overflow-hidden"
   >
-  <TabOne/>
+  <TabTwo/>
 
     
      <!-- <MainpageFooter/>  -->
@@ -13,12 +13,12 @@
 // @ is an alias to /src
 //  import MainpageHeader from '@/components/MainpageHeader';
 //  import MainpageFooter from '@/components/MainpageFooter';
- import TabOne from '@/components/Header/TabOne';
+ import TabTwo from '@/components/Header/TabTwo';
 export default {
-  name: 'HomeView',
+  name: 'HomeView2',
 
   components: {
-    TabOne
+    TabTwo
     // MainpageHeader,
     // MainpageFooter,
     // HelloWorld,

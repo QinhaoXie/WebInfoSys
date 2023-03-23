@@ -1,18 +1,14 @@
 <template>
-  <v-app class="overflow-hidden"
-  >
-
-    <NeviMenu/>
-
-   
-
-   
+  <v-app class="overflow-hidden">
+    
     <v-main>      
       <div>
-        <v-container style="height: 400px;"> </v-container>
+    
+        <NeviMenu/>
+        <!-- space before login sheet -->
+        <v-container style="height: 150px;"> </v-container>
+        <!-- login sheet -->
         <v-sheet>
-
-            
               <v-container
               class="fill-height"
               fluid
@@ -27,13 +23,22 @@
                   md="4"
                 >
                   <v-card class="elevation-12">
+                        <!-- top Login Form Bar -->
                         <v-toolbar
                           color="primary"
                           dark
                           flat
                         >
-                        <v-toolbar-title>Login form</v-toolbar-title>
-                          <v-spacer></v-spacer>
+                            <!-- background-color -->
+                            <template v-slot:img="{ props }">
+                              <v-img
+                                v-bind="props"
+                                gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
+                              ></v-img>
+                            </template>
+                            <!-- text -->
+                            <v-app-bar-title>Login Form</v-app-bar-title>
+                            <v-spacer></v-spacer>
                         </v-toolbar>
                     <v-card-text>
                       <v-form>
@@ -52,9 +57,15 @@
                           type="password"
                         ></v-text-field>
                       </v-form>
+                      <v-checkbox
+                      v-model="checkbox"
+                      :label="`Remember me`"
+                      ></v-checkbox>
                     </v-card-text>
+                    
                     <v-card-actions>
-                      <v-spacer></v-spacer>
+                     
+                     <v-spacer></v-spacer>
                       <v-btn color="primary">Login</v-btn>
                     </v-card-actions>
                   </v-card>
@@ -63,7 +74,7 @@
             </v-container>
    
             
-            <MainpageFooter/>
+            <!-- <MainpageFooter/> -->
 
         </v-sheet>
       </div>
@@ -77,23 +88,20 @@
 // @ is an alias to /src
 import NeviMenu from '@/components/NeviMenu';
 //  import MainpageHeader from '@/components/MainpageHeader';
- import MainpageFooter from '@/components/MainpageFooter';
+//  import MainpageFooter from '@/components/MainpageFooter';
 export default {
   name: 'LoginView',
 
   components: {
     // MainpageHeader,
-    MainpageFooter,
+    // MainpageFooter,
     NeviMenu,
     // HelloWorld,
   },
 
-  // data: () => ({
-  //   //
-  // }),
   data: () => ({
     drawer: false,
-
+    checkbox: false,
     }),
 
 
