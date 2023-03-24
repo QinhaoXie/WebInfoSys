@@ -1,12 +1,12 @@
 <template>
-  <div id="app">
+  <div id="app" >
     <v-row><MainpageHeader/></v-row>
     
     <!-- <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </nav> -->
-    <router-view/>
+    <router-view  id="scrolling-techniques-3" />
     
     <!-- <MainpageFooter/> -->
   </div>
@@ -34,6 +34,7 @@ nav {
   }
 }
 </style> -->
+
 <script>
 
 import MainpageHeader from '@/components/MainpageHeader';

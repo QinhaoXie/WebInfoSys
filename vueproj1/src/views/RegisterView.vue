@@ -1,13 +1,13 @@
 <template>
-  <v-app class="overflow-hidden" >
+  <v-app class="overflow-hidden">
     
     <v-main>      
       <div>
     
         <NeviMenu/>
-        <!-- space before login sheet -->
+        <!-- space before Register sheet -->
         <v-container style="height: 150px;"> </v-container>
-        <!-- login sheet -->
+        <!-- Register sheet -->
         <v-sheet>
               <v-container
               class="fill-height"
@@ -23,7 +23,7 @@
                   md="4"
                 >
                   <v-card class="elevation-12">
-                        <!-- top Login Form Bar -->
+                        <!-- top Register Form Bar -->
                         <v-toolbar
                           color="primary"
                           dark
@@ -37,14 +37,14 @@
                               ></v-img>
                             </template>
                             <!-- text -->
-                            <v-app-bar-title>Login Form</v-app-bar-title>
+                            <v-app-bar-title>Register Form</v-app-bar-title>
                             <v-spacer></v-spacer>
                         </v-toolbar>
                     <v-card-text>
                       <v-form>
                         <v-text-field
-                          label="Login"
-                          name="login"
+                          label="Username"
+                          name="Username"
                           prepend-icon="mdi-account"
                           type="text"
                         ></v-text-field>
@@ -56,17 +56,27 @@
                           prepend-icon="mdi-lock"
                           type="password"
                         ></v-text-field>
+                        <v-text-field
+                        id="password2"
+                        label="Password Again"
+                        name="password"
+                        prepend-icon="mdi-lock"
+                        type="password"
+                      ></v-text-field>
+                        <v-text-field
+                          label="Email"
+                          name="Email"
+                          prepend-icon="mdi-account"
+                          type="text"
+                        ></v-text-field>
                       </v-form>
-                      <v-checkbox
-                      v-model="checkbox"
-                      :label="`Remember me`"
-                      ></v-checkbox>
+
                     </v-card-text>
                     
                     <v-card-actions>
                      
                      <v-spacer></v-spacer>
-                      <v-btn id="loginbtn" color="primary">Login</v-btn>
+                      <v-btn color="primary">Register</v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-col>
@@ -86,18 +96,11 @@
 
 <script>
 // @ is an alias to /src
-// import $ from 'jquery'
 import NeviMenu from '@/components/NeviMenu';
 //  import MainpageHeader from '@/components/MainpageHeader';
 //  import MainpageFooter from '@/components/MainpageFooter';
-// $(document).ready(function(){
-//   $("#loginbtn").click(function(){
-//   var htmlobj=$.ajax({url:"",async:false});
-//   $("#app").html(htmlobj.responseText);
-//   });
-// });
 export default {
-  name: 'LoginView',
+  name: 'RegisterView',
 
   components: {
     // MainpageHeader,
