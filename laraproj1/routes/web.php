@@ -27,6 +27,8 @@ Route::get('/getuser', function () {
 use App\Http\Controllers\UserController;
  
 Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/user/login/{username}/{passward}', [UserController::class, 'login']);
+Route::get('/user/register/{username}/{passward}/{email}', [UserController::class, 'register']);
 
 
 
