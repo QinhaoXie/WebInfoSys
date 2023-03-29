@@ -1,13 +1,13 @@
 <template>
-  <v-app class="overflow-hidden" >
+  <v-app class="overflow-hidden">
     
     <v-main>      
       <div>
     
         <NeviMenu/>
-        <!-- space before login sheet -->
+        <!-- space before Register sheet -->
         <v-container style="height: 150px;"> </v-container>
-        <!-- login sheet -->
+        <!-- Register sheet -->
         <v-sheet>
               <v-container
               class="fill-height"
@@ -23,7 +23,7 @@
                   md="4"
                 >
                   <v-card class="elevation-12">
-                        <!-- top Login Form Bar -->
+                        <!-- top Register Form Bar -->
                         <v-toolbar
                           color="primary"
                           dark
@@ -37,37 +37,18 @@
                               ></v-img>
                             </template>
                             <!-- text -->
-                            <v-app-bar-title>Login Form</v-app-bar-title>
+                            <v-app-bar-title>Register Form</v-app-bar-title>
                             <v-spacer></v-spacer>
                         </v-toolbar>
                     <v-card-text>
                       <v-form>
-                        <v-text-field
-                          label="Login"
-                          name="login"
-                          prepend-icon="mdi-account"
-                          type="text"
-                        ></v-text-field>
-      
-                        <v-text-field
-                          id="password"
-                          label="Password"
-                          name="password"
-                          prepend-icon="mdi-lock"
-                          type="password"
-                        ></v-text-field>
+                        <v-card-title>congratulations！</v-card-title> 
+                        <v-card-text>You have signed up your account!<br/>
+                          Let's login from <router-link to="/login">here</router-link>
+                        </v-card-text>
                       </v-form>
-                      <v-checkbox
-                      v-model="checkbox"
-                      :label="`Remember me`"
-                      ></v-checkbox>
+
                     </v-card-text>
-                    
-                    <v-card-actions>
-                     
-                     <v-spacer></v-spacer>
-                      <v-btn id="loginbtn" color="primary">Login</v-btn>
-                    </v-card-actions>
                   </v-card>
                 </v-col>
               </v-row>
@@ -86,43 +67,50 @@
 
 <script>
 // @ is an alias to /src
-import $ from 'jquery'
 import NeviMenu from '@/components/NeviMenu';
+// import { Router } from 'express';
+// import $ from 'jquery'
 //  import MainpageHeader from '@/components/MainpageHeader';
 //  import MainpageFooter from '@/components/MainpageFooter';
-$(document).ready(function(){
-  $("#loginbtn").click(function(){
-  $.ajax({url:"https://infs3202-942629ae.uqcloud.net/lara/user/login/111/222/",
-  dataType:'json',
-  async:false,
-  success:function(data){
-  console.log(data);
-  }
-});
-// alert(htmlobj.responseText)
-  });
-});
 export default {
-  name: 'LoginView',
+  name: 'RegisterSuccess',
 
   components: {
     // MainpageHeader,
     // MainpageFooter,
     NeviMenu,
-    // HelloWorld,
-  },
+    // Router
+},
 
   data: () => ({
     drawer: false,
     checkbox: false,
+    register:{username:null,
+      password:null,
+      password2:null,
+      email:null
+    },
     }),
 
-
+    methods: {
+    // request1() {
+    //   var url="https://infs3202-942629ae.uqcloud.net/lara/user/register/"+this.register.username+"/"+this.register.password+"/"+this.register.email+"/"
+    //   var htmlobj=$.ajax({url:url,
+    //                       dataType:'text',
+    //                       async:false,
+    //                       success:function(data){
+    //                       console.log(data);
+    //                       }
+    //                     })
+    // if(htmlobj.responseText=="register success"){
+    //   this.$router.push('/');
+    // }      
+    // }}
     // watch: {
     //   group () {
     //     this.drawer = false
     //   },
-    // },
+    },
 
 };
 </script>

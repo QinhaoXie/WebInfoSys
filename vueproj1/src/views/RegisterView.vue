@@ -47,14 +47,15 @@
                           name="Username"
                           prepend-icon="mdi-account"
                           type="text"
-                        ></v-text-field>
-      
+                          v-model="register.username"
+                          ></v-text-field>
                         <v-text-field
                           id="password"
                           label="Password"
                           name="password"
                           prepend-icon="mdi-lock"
                           type="password"
+                          v-model="register.password"
                         ></v-text-field>
                         <v-text-field
                         id="password2"
@@ -62,21 +63,25 @@
                         name="password"
                         prepend-icon="mdi-lock"
                         type="password"
+                        v-model="register.password2"
                       ></v-text-field>
                         <v-text-field
                           label="Email"
                           name="Email"
                           prepend-icon="mdi-account"
                           type="text"
+                          v-model="register.email"
                         ></v-text-field>
                       </v-form>
-
-                    </v-card-text>
+                      
+                      <component :is="currentComp" v-bind="errmsg">{{ errmsg }}</component>
+                      
+                    </v-card-text> 
                     
                     <v-card-actions>
                      
                      <v-spacer></v-spacer>
-                      <v-btn color="primary">Register</v-btn>
+                      <v-btn @click="request1" color="primary">Register</v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-col>
@@ -97,8 +102,22 @@
 <script>
 // @ is an alias to /src
 import NeviMenu from '@/components/NeviMenu';
+
+import $ from 'jquery'
 //  import MainpageHeader from '@/components/MainpageHeader';
 //  import MainpageFooter from '@/components/MainpageFooter';
+import AlertComp from "@/components/AlertComp"
+
+var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+function isEmailAddress(str) {
+    // str = "azamsharp@gmail.com";      
+    // alert(str.match(pattern)); 
+    return str.match(pattern);    
+
+}
+
+
+
 export default {
   name: 'RegisterView',
 
@@ -106,15 +125,59 @@ export default {
     // MainpageHeader,
     // MainpageFooter,
     NeviMenu,
+    AlertComp
     // HelloWorld,
   },
 
   data: () => ({
+    errmsg:"",
     drawer: false,
     checkbox: false,
+    currentComp:"AlertCmp",
+    register:{username:null,
+      password:null,
+      password2:null,
+      email:null
+    },
     }),
 
-
+    methods: {
+    request1() {
+      if(this.register.username=="" || this.register.username==null){
+        console.log("please input username");
+        this.errmsg="please input username";
+        this.currentComp="AlertComp";
+        }else if(this.register.password=="" || this.register.password==null){
+          console.log("please input password");
+        this.errmsg="please input password";
+        this.currentComp="AlertComp";
+      }else if(this.register.password2=="" || this.register.password2==null){
+          console.log("please input password again");
+        this.errmsg="please input password again";
+        this.currentComp="AlertComp";
+      }else if(this.register.email==null || isEmailAddress(this.register.email)==null){
+        console.log("please inout a valid email");
+        this.errmsg="please inout a valid email";
+        this.currentComp="AlertComp";
+      }else if(this.register.password==this.register.password2){
+              console.log("1=2");
+              var url="https://infs3202-942629ae.uqcloud.net/lara/user/register/"+this.register.username+"/"+this.register.password+"/"+this.register.email+"/"
+              var htmlobj=$.ajax({url:url,
+                                  dataType:'text',
+                                  async:false,
+                                  success:function(data){
+                                  console.log(data);
+                                  }
+                                })
+              if(htmlobj.responseText=="register success"){
+                this.$router.push('/registersuccess');
+              }
+      }else{
+        console.log("1!=2");
+        this.errmsg="password validation fail,please make sure two password are identical";
+        this.currentComp="AlertComp";
+      } 
+    }}
     // watch: {
     //   group () {
     //     this.drawer = false
