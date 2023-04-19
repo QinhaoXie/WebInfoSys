@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserProfile;
 
 class UserController extends Controller
 {
@@ -12,12 +13,12 @@ class UserController extends Controller
      * Show the profile for a given user.
      */
 
-    public function show(string $id): View
-    {
-        return view('user.profile', [
-            'user' => User::findOrFail($id)
-        ]);
-    }
+    // public function show(string $id): View
+    // {
+    //     return view('user.profile', [
+    //         'user' => User::findOrFail($id)
+    //     ]);
+    // }
 
     public function login(string $username,string $password): string
     {
@@ -45,13 +46,17 @@ class UserController extends Controller
             'user' => User::findOrFail($id)
         ]);
        */
-	$User = new User();
-	
-	$User->name = $username;
-	$User->password= $password;
-	$User->email= $email;
-	$User->save();
-	//dd($username,$password,$email);
-	return "register success";
+    $User = new User();
+    
+    $User->name = $username;
+    $User->password= $password;
+    $User->email= $email;
+    $User->save();
+    // create userprofile for new user
+    
+    $tmpupc=new  UserProfileController();
+    $tmpupc->create($User->id); 
+    //dd($username,$password,$email);
+    return "register success";
     }
 }
