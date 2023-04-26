@@ -1,3 +1,13 @@
 root@infs3202-942629ae:~/WebInfoSys/laraproj1# php artisan make:controller UserProfileController --resource --model=UserProfile
 root@infs3202-942629ae:~/WebInfoSys/laraproj1# php artisan make:migration create_userprofile_table --create=user_profiles
 root@infs3202-942629ae:~/WebInfoSys/laraproj1# php artisan migrate:refresh
+
+php artisan make:mail MyTestMail
+send-email example:
+      https://www.itsolutionstuff.com/post/laravel-7-send-email-exampleexample.html
+
+
+141A318A:SSL routines:tls_process_ske_dhe:dh key too small:
+      https://askubuntu.com/questions/1233186/ubuntu-20-04-how-to-set-lower-ssl-security-level
+email verification:
+    https://stackoverflow.com/questions/64172138/laravel-8-how-do-i-verify-the-users-email-address-after-registration-without-ha

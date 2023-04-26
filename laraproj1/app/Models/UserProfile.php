@@ -28,8 +28,6 @@ class UserProfile extends Model
         ->where('name',$username)
     // ->take(1)
         ->get();
-      
-
     }
   }
 }

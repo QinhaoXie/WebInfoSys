@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserProfile;
+use Illuminate\Auth\Events\Registered;
 
 class UserController extends Controller
 {
@@ -57,6 +58,7 @@ class UserController extends Controller
     $tmpupc=new  UserProfileController();
     $tmpupc->create($User->id); 
     //dd($username,$password,$email);
+    event(new Registered($User));
     return "register success";
     }
 }
