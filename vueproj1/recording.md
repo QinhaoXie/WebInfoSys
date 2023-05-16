@@ -8,3 +8,4 @@ vue create vueproj1<br>
 cd vueproj1<br>
 vue add vuetify<br>
 vue add router<br>
+npm install vue-cookie --save 

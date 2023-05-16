@@ -25,7 +25,23 @@
             <v-app-bar-title>Online Learning</v-app-bar-title>
       
             <v-spacer></v-spacer>
-            
+            <router-link to="/Upload">
+              <v-btn  plain large text>
+            Upload
+            </v-btn>
+          </router-link>
+            <router-link to="/map">
+              <v-btn  plain large text>
+              Map
+            </v-btn>
+          </router-link>
+            <a href="https://infs3202-942629ae.uqcloud.net/lara/pdf">
+            <v-btn plain large text>
+              Download pdf
+            </v-btn>
+           </a>
+             
+          
             <v-btn icon>
               <v-icon>mdi-magnify</v-icon>
             </v-btn>
@@ -38,13 +54,21 @@
               <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
             <router-link to="/login">
-              <v-btn plain large text>
+              <v-btn v-if="this.showlogin" plain large text>
               Login
             </v-btn>
           </router-link>
           <router-link to="/register">
-            <v-btn plain large>
+            <v-btn v-if="this.showlogin" plain large>
             Register
+          </v-btn>
+        </router-link>
+        <v-btn v-if="!this.showlogin" @click="logout" plain large>
+            Logout
+          </v-btn>
+          <router-link to="/userprofile">
+            <v-btn v-if="!this.showlogin" plain large>
+            Profile
           </v-btn>
         </router-link>
             
@@ -72,7 +96,7 @@
                     <v-card-text>2</v-card-text>
                   </v-card>
                 </v-tab-item>
-                <v-tab>Tab 3</v-tab>
+                <v-tab><router-link to="/MyCourses" style="text-decoration: none;">My Links</router-link></v-tab>
                 <v-tab-item>
                   <v-card
                     flat
@@ -89,12 +113,19 @@
    
 
   </template>
+ 
   
   <script>
 
-
+  import $ from 'jquery'
+  import Cookies from 'js-cookie';
+  // if($.cookie("laravel_session")){
+  // //   // $("#loginbtnhead").hide();
+  // }
+  // console.log(this.cookies.isKey(key));
   // import TabOne from '@/components/Header/TabOne.vue'
   import TabTwo from '@/components/Header/TabTwo.vue'
+
   export default {
     name: 'MainpageHeader',
   
@@ -102,8 +133,28 @@
       // TabOne,
       TabTwo
     },
-  
+    methods:{
+      logout(){
+        $.get("https://infs3202-942629ae.uqcloud.net/lara/userlogout", function(data, status){
+         alert("Data: " + data + "\nStatus: " + status);
+         Cookies.remove("PHPSESSID");
+         
+         window.location.href="https://infs3202-942629ae.uqcloud.net/vue";
+        });
+      },
+    }
+    ,
+    mounted:function(){
+      console.log(this.$cookies.keys())
+      console.log(Cookies.get("laravel_session"));
+      if(this.$cookies.isKey('PHPSESSID')){
+        this.showlogin=false;
+        
+      }
+      
+    },
     data: () => ({
+      showlogin:true,
       // selectedItem: 0,
       // items: [
       //   { text: 'My Files', icon: 'mdi-folder' },

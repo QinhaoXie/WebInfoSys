@@ -42,22 +42,44 @@
                         </v-toolbar>
                     <v-card-text>
                       <v-form>
-                        <v-text-field
-                          label="Login"
-                          name="login"
-                          prepend-icon="mdi-account"
-                          type="text"
-                          v-model="this.username"
-                        ></v-text-field>
-      
-                        <v-text-field
-                          id="password"
-                          label="Password"
-                          name="password"
-                          prepend-icon="mdi-lock"
-                          type="password"
-                          v-model="this.password"
-                        ></v-text-field>
+                        <!DOCTYPE html>
+
+
+    <form method="post" action="https://infs3202-942629ae.uqcloud.net/lara/login">
+        <table width="400px"  border="1px" cellspcing="0">
+            <tbody>
+                <tr height="40px">
+                                   </tr>
+                <tr height="40px">
+                    <td align="right">email:</td>
+                    <td>
+                        <input type="text" name="email">
+                    </td>
+                </tr>
+                <tr height="40px">
+                    <td align="right">password:</td>
+                    <td>
+                        <input type="password" name="password">
+                    </td> 
+                </tr> 
+                <tr> <label class="float-left form-check-label"><input type="checkbox" name="remember"> </label>
+                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                
+                </tr>
+
+                <tr height="40px">
+                    <td colspan="2" align="center">
+                        <input type="submit" value="submit">
+                        
+                    </td>
+                </tr>
+                           </tbody>
+        </table>
+    </form>
+    
+
+
+
                       </v-form>
                       <v-checkbox
                       v-model="checkbox"

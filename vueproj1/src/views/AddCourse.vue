@@ -43,48 +43,41 @@
                     <v-card-text>
                       <v-form>
                         <v-text-field
-                          label="Username"
-                          name="Username"
+                          label="coursename"
+                          name="coursename"
                           prepend-icon="mdi-account"
-                          type="text"
-                          v-model="register.username"
+                          type=""
+                          v-model="add.coursename"
                           ></v-text-field>
                         <v-text-field
-                          id="password"
-                          label="Password"
-                          name="password"
+                          id="teacher"
+                          label="teacher"
+                          name="teacher"
                           prepend-icon="mdi-lock"
-                          type="password"
-                          v-model="register.password"
+                          type="text"
+                          v-model="add.teacher"
                         ></v-text-field>
                         <v-text-field
-                        id="password2"
-                        label="Password Again"
-                        name="password"
+                        id="course_description"
+                        label="course_description"
+                        name="course_description"
                         prepend-icon="mdi-lock"
-                        type="password"
-                        v-model="register.password2"
+                        type="text"
+                        v-model="add.course_description"
                       ></v-text-field>
                         <v-text-field
-                          label="Email"
-                          name="Email"
+                          label="lecture_number"
+                          name="lecture_number"
                           prepend-icon="mdi-account"
                           type="text"
-                          v-model="register.email"
+                          v-model="add.lecture_number"
                         ></v-text-field>
                         <v-text-field
-                          label="What is your bestfriend's name"
-                          name="bestfriend"
+                          label="coursebooks"
+                          name="coursebooks"
                           prepend-icon="mdi-account"
                           type="text"
-                          v-model="register.bestfriend"
-                        ></v-text-field>
-                        <v-text-field
-                          label="What is your favorite toy"
-                          name="favoritetoy"
-                          prepend-icon="mdi-account"
-                          type="text"
-                          v-model="register.favoritetoy"
+                          v-model="add.coursebooks"
                         ></v-text-field>
                       </v-form>
                       
@@ -122,18 +115,11 @@ import $ from 'jquery'
 //  import MainpageFooter from '@/components/MainpageFooter';
 import AlertComp from "@/components/AlertComp"
 
-var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
-function isEmailAddress(str) {
-    // str = "azamsharp@gmail.com";      
-    // alert(str.match(pattern)); 
-    return str.match(pattern);    
-
-}
 
 
 
 export default {
-  name: 'RegisterView',
+  name: 'AddCourse',
 
   components: {
     // MainpageHeader,
@@ -148,37 +134,18 @@ export default {
     drawer: false,
     checkbox: false,
     currentComp:"AlertCmp",
-    register:{username:null,
-      password:null,
-      password2:null,
-      email:null,
-      bestfriend:null,
-      favoritetoy:null,
-
+    add:{coursename:null,
+      teacher:null,
+      course_description:null,
+      lecture_number:null,
+      coursebooks:null,
     },
     }),
 
     methods: {
     request1() {
-      if(this.register.username=="" || this.register.username==null){
-        console.log("please input username");
-        this.errmsg="please input username";
-        this.currentComp="AlertComp";
-        }else if(this.register.password=="" || this.register.password==null){
-          console.log("please input password");
-        this.errmsg="please input password";
-        this.currentComp="AlertComp";
-      }else if(this.register.password2=="" || this.register.password2==null){
-          console.log("please input password again");
-        this.errmsg="please input password again";
-        this.currentComp="AlertComp";
-      }else if(this.register.email==null || isEmailAddress(this.register.email)==null){
-        console.log("please inout a valid email");
-        this.errmsg="please inout a valid email";
-        this.currentComp="AlertComp";
-      }else if(this.register.password==this.register.password2){
-              console.log("1=2");
-              var url="https://infs3202-942629ae.uqcloud.net/lara/user/register/"+this.register.username+"/"+this.register.password+"/"+this.register.email+"/"+this.register.bestfriend +"/"+ this.register.favoritetoy+"/";
+      
+              var url="https://infs3202-942629ae.uqcloud.net/lara/course/create/"+this.add.coursename+"/"+this.add.teacher+"/"+this.add.course_description+"/"+this.add.lecture_number+"/"+this.add.coursebooks;
               console.log(url);
               var htmlobj=$.ajax({url:url,
                                   dataType:'text',
@@ -187,12 +154,12 @@ export default {
                                   console.log(data);
                                   }
                                 })
-              if(htmlobj.responseText=="register success"){
-                this.$router.push('/registersuccess');
+              if(htmlobj.responseText=="success"){
+                alert("adding successfully")
               }
-      }else{
+      else{
         console.log("1!=2");
-        this.errmsg="password validation fail,please make sure two password are identical";
+        this.errmsg="fail";
         this.currentComp="AlertComp";
       } 
     }}

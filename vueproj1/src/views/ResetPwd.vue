@@ -37,7 +37,7 @@
                               ></v-img>
                             </template>
                             <!-- text -->
-                            <v-app-bar-title>Register Form</v-app-bar-title>
+                            <v-app-bar-title>Reset Your Password</v-app-bar-title>
                             <v-spacer></v-spacer>
                         </v-toolbar>
                     <v-card-text>
@@ -133,7 +133,7 @@ function isEmailAddress(str) {
 
 
 export default {
-  name: 'RegisterView',
+name: 'ResetPwd',
 
   components: {
     // MainpageHeader,
@@ -178,7 +178,7 @@ export default {
         this.currentComp="AlertComp";
       }else if(this.register.password==this.register.password2){
               console.log("1=2");
-              var url="https://infs3202-942629ae.uqcloud.net/lara/user/register/"+this.register.username+"/"+this.register.password+"/"+this.register.email+"/"+this.register.bestfriend +"/"+ this.register.favoritetoy+"/";
+              var url="https://infs3202-942629ae.uqcloud.net/lara/user/update/"+this.register.username+"/"+this.register.password+"/"+this.register.email+"/"+this.register.bestfriend +"/"+ this.register.favoritetoy+"/";
               console.log(url);
               var htmlobj=$.ajax({url:url,
                                   dataType:'text',
@@ -187,12 +187,16 @@ export default {
                                   console.log(data);
                                   }
                                 })
-              if(htmlobj.responseText=="register success"){
-                this.$router.push('/registersuccess');
+              if(htmlobj.responseText=="update success"){
+                // this.$router.push('/registersuccess');
+              alert("update success");
+              this.$router.push('/login');
+              }else{
+              alert('validation fail,please check you information');
               }
       }else{
         console.log("1!=2");
-        this.errmsg="password validation fail,please make sure two password are identical";
+        this.errmsg="validation fail,please check you information";
         this.currentComp="AlertComp";
       } 
     }}
