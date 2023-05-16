@@ -19,13 +19,13 @@ class UserProfile extends Model
    return $this->belongsTo('App\Models\User');
 
   }
-  public function getprofilebyuser(string $username = null) {
+  public function getprofilebyuser(string $email= null) {
     # code...
-    if ($username != null){
+    if ($email!= null){
       return $this->join('users', 'user_profiles.user_id', '=', 'users.id')
         ->select('users.*', 'user_profiles.*')
         ->orderBy('name', 'desc') 
-        ->where('name',$username)
+        ->where('email',$email)
     // ->take(1)
         ->get();
     }

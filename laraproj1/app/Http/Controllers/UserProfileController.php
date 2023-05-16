@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class UserProfileController extends Controller
 {
     /**
@@ -42,20 +42,20 @@ class UserProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UserProfile $userProfile,string $username)
+    public function show(UserProfile $userProfile,string $email)
     {
     //
-     return $userProfile->getprofilebyuser($username)->toJson();
+     return $userProfile->getprofilebyuser($email)->toJson();
 
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for  wediting the specified resource.
      */
-    public function edit(UserProfile $userProfile,string $username)
+    public function edit(UserProfile $userProfile,string $email)
     {
     //
-    return $userProfile->getprofilebyuser($username)->toJson();
+    return $userProfile->getprofilebyuser($email)->toJson();
 
     }
 
@@ -64,7 +64,18 @@ class UserProfileController extends Controller
      */
     public function update(Request $request, UserProfile $userProfile)
     {
-        //
+    //
+    $info = $request->personinfo;
+    $email = $request->email;
+    $user_id=$users = DB::table('users')
+                     ->select(DB::raw('id'))
+                     ->where('email', '=', $email)
+                     ->get()[0]->id;
+    // return $user_id;
+    \App\Models\UserProfile::where('user_id', $user_id)
+               ->update(['personalintro' => $info]);
+    return redirect('/vue/userprofile');
+    // return $email; 
     }
 
     /**

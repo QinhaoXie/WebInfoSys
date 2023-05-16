@@ -2,19 +2,22 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use DateTime;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable; 
+use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\CanResetPassword as AuthCanResetPassword;
 
 class User extends Authenticatable implements MustVerifyEmail,AuthCanResetPassword
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use HasProfilePhoto;
+    use Notifiable;
+    use TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,9 +25,11 @@ class User extends Authenticatable implements MustVerifyEmail,AuthCanResetPasswo
      * @var array<int, string>
      */
     protected $fillable = [
-        'avatarfile',
-        'personalintro',
-        'last_edit',
+        'name',
+        'email',
+    'password',
+    'bestfriend',
+    'favoritetoy'
     ];
 
     /**
@@ -32,10 +37,12 @@ class User extends Authenticatable implements MustVerifyEmail,AuthCanResetPasswo
      *
      * @var array<int, string>
      */
-    // protected $hidden = [
-    //     'password',
-    //     'remember_token',
-    // ];
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
+    ];
 
     /**
      * The attributes that should be cast.
@@ -44,39 +51,14 @@ class User extends Authenticatable implements MustVerifyEmail,AuthCanResetPasswo
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-  ];
-  public function userprofile() {
-    # code...
-    return $this->hasOne('App\Models\UserProfile');
-  }
- /**
-     * Determine if the user has verified their email address.
-     *
-     * @return bool
-     */
-  // public function hasVerifiedEmail(){
-  //   if($this->email_verified_at==Null){
-  //     return false;
-  //   }else {
-  //     return true;
-  //   }
-  // }
+    ];
 
     /**
-     * Mark the given user's email as verified.
+     * The accessors to append to the model's array form.
      *
-     * @return bool
+     * @var array<int, string>
      */
-  // public function markEmailAsVerified(){
-  //    
-  //   $this->email_verified_at= new DateTime('now');
-  //   $this->save();
-  // }
-
-    /**
-     * Send the email verification notification.
-     *
-     * @return void
-     */
-
+    protected $appends = [
+        'profile_photo_url',
+    ];
 }
