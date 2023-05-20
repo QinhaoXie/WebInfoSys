@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Stmt\TryCatch;
 
 class UploadFile extends Controller
 {
@@ -18,8 +20,15 @@ class UploadFile extends Controller
 public function upload(Request $request)
     {
     //
+    dd($request->file('file'));
+  try {
   $path=$request->file('file')->store('testpath');
     return $path;
+    
+  } catch ( Exception $th) {
+      //throw $th; 
+      return dd($request);
+  }
   
   } 
 public function manyfileupload(Request $request)
@@ -30,12 +39,21 @@ public function manyfileupload(Request $request)
   
   } 
 
+
+
+
+
 public function image(Request $request)
     {
     //
     $path=$request->file('file')->store('public');
-//   
-// $filename = "../..".Storage::url($path);
+    $sourceFile = '../storage/app/'.$path;
+    $outputFile = '../storage/app/public/compressed-image.jpg';  
+    $outputQuality = 30;
+    $imageLayer = imagecreatefromjpeg($sourceFile);
+    imagejpeg($imageLayer,$outputFile,$outputQuality);
+    // return Storage::download("public/compressed-image.jpg");
+    // $filename = "../..".Storage::url($path);
 // $resizedFilename = "../myresizedimage.png";
 // // return $filename;
 // // resize the image with 300x300
@@ -51,9 +69,6 @@ public function image(Request $request)
 
 
 }
-
-
-
 
 
 

@@ -49,7 +49,10 @@ Route::get('/getuser', function () {
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\EmailVerifyController;
+use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 Route::get('/user/{id}', [UserController::class, 'show']);
 // Route::get('/user/login/{username?}/{passward?}', [UserController::class, 'login'])->name('1login');
 Route::post('/user/login', [UserController::class, 'login'])->name('loginreq');
@@ -62,13 +65,30 @@ Route::post('/file/upload/', [UploadFile::class, 'upload']);
 Route::post('/file/image/', [UploadFile::class, 'image']);
 // Route::get('/vue/login/', [UserProfileController::class, 'update'])->name('login');
 
-Route::get('/course/index/{coursename}', [CourseController::class, 'index']);
+Route::get('/course/index/{coursename}/{offset}/', [CourseController::class, 'index']);
 Route::get('/course/index/autocomp/{coursename}', [CourseController::class, 'autocomp']);
 Route::get('/course/create/{coursename}/{teacher}/{course_description}/{lecture_number}/{coursebooks}'
   , [CourseController::class, 'create']);
+Route::get('/shopping/index', [CourseController::class, 'index']);
 
 
 
+
+
+
+
+
+//APIs
+//
+//
+
+Route::get('/dash/coursecount', function () {
+  # code...
+  return  DB::table('courses')
+    ->select("count(id)")
+    ->groupByRaw("id")
+    ->get();
+});
 
 
 

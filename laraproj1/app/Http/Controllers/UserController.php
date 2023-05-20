@@ -9,6 +9,8 @@ use App\Models\UserProfile;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Livewire\Request as LivewireRequest;
+
 class UserController extends Controller
 {
     //

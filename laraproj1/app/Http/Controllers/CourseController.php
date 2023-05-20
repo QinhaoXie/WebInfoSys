@@ -11,13 +11,14 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($coursename)
+    public function index($coursename,$offset)
     {
     //
     $coursesmodel = new Course();
     $courses=$coursesmodel
           ->where('coursename','like','%'.$coursename.'%')
-          ->take(20)
+    ->take(20)
+    ->offset($offset)
           ->get();
     return $courses->toJson();
     }
