@@ -1,0 +1,37 @@
+<template>
+  
+</template>
+
+<script>
+import { Line } from 'vue-chartjs'
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+} from 'chart.js'
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
+export default {
+  extends: Line,
+  props: {
+    chartdata: {
+      type: Object,
+      default: null
+    },
+    options: {
+      type: Object,
+      default: null
+    }
+  },
+  mounted () {
+    this.renderChart(this.chartdata, this.options)
+  }
+}
+</script>
+
+<style>
+
+</style>

@@ -1,7 +1,7 @@
 <template>
       
 
-        <v-container fluid >
+        <v-container fluid id="tabone">
         <v-row justify="center" class="my-auto" >
           <!-- <v-col><v-container max-width="5%"/></v-col> -->
           <!-- <v-col>  -->
@@ -27,6 +27,7 @@
   :items="items"
 
 ></v-autocomplete>
+<span class="scrollbtn" style="visibility: hidden;" @click="add(20)"></span>
 
               
               <v-btn @click="search" icon>
@@ -113,6 +114,17 @@
   <script>
   import $ from 'jquery'
     // import HeaderCarousel from '@/components/HeaderCarousel'
+        window.onload = function() {
+      var scr = localStorage.getItem("tabonescr",scr);
+          console.log("initial scr:"+scr);
+        $(".tabone").scrollTop=eval(scr);
+          
+
+    }
+
+
+
+
   export default {
     name: 'TabOne',
     components:{
@@ -136,9 +148,24 @@
         ],
         items:[],
       }),
+      created:function () {
+        var scr=$(".tabone").scrollTop;
+        console.log(scr);
+        localStorage.setItem("tabonescr",scr);
+        var offset = 20;
+        $(window).scroll(function() {
+        $(window).scrollTop()
+          if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+          alert("near bottom!");
+          $(".scrollbtn").click();
+          offset=offset+0;
+          console.log("offset:"+offset);
+        }
+        });
+      },
       methods:{
         search(){
-          var url = "https://infs3202-942629ae.uqcloud.net/lara/course/index/"+this.searchword;
+          var url = "https://infs3202-942629ae.uqcloud.net/lara/course/index/"+this.searchword+'/'+'0'+'/';
           console.log(url);
               $.get(url,
                   {
@@ -179,6 +206,46 @@
         detail(coursename){
             // this.$router.push({ name: 'CourseInfo', params: { coursename: coursename }});
             this.$router.push({path: '/CourseInfo', query: {coursename: coursename}});
+        },
+
+        add(offset){
+          var url = "https://infs3202-942629ae.uqcloud.net/lara/course/index/"+this.searchword+"/"+offset;
+          console.log(url);
+              $.get(url,
+                  {
+                  },
+                  function(data, status){
+                    console.log("sent");
+                    console.log("Data: " + data + "\nStatus: " + status);
+                    // if(data!="login failed:The provided credentials do not match our records."){
+                    //   // alert("Login Success");
+                    // window.location.href="https://infs3202-942629ae.uqcloud.net/vue";
+                    // }else{alert(data);}
+                    localStorage.setItem("data",data);
+                    
+                  });
+                  var list=this.cards;
+          var result =JSON.parse(localStorage.getItem("data"));
+          // this.cards=[];
+          $.each(result, function (id, course) {
+            
+          if(id==1){
+            console.log(id,course); 
+            console.log(course.coursename);
+            console.log(course.teacher);
+            console.log(course.course_description);
+        }
+          list.push({title :course.coursename, src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 6})
+          
+          // this.id=result[0].id;
+          //   this.name=result[0].name;
+          //   // this.infos.email=result[0].email;
+          //   this.personalintro=result[0].personalintro;
+          //   if( this.personalintro==''){ this.personalintro='empty';}
+            
+          });
+          console.log(list);
+          this.cards=list;
         },
         searchautocomp(){
           console.log("autocomplete")

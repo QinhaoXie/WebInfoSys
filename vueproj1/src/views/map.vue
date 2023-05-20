@@ -1,4 +1,7 @@
 <template>
+<v-container>
+  <objectdetect/>
+
 <div style="height: 500px; width: 100%">
   <div style="height: 200px; overflow: auto;">
     <p>First marker is placed at {{ withPopup.lat }}, {{ withPopup.lng }}</p>
@@ -49,15 +52,19 @@
     </l-marker>
   </l-map>
 </div>
+</v-container>
+
 </template>
 
 <script>
 import { latLng } from "leaflet";
 import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
+import objectdetect from "@/components/ObjectDetect.vue";
 
 export default {
 name: "MapView",
 components: {
+  objectdetect,
   LMap,
   LTileLayer,
   LMarker,

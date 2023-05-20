@@ -4,9 +4,9 @@ const instance = axios.create({
 });
 // let baseURL = process.env.BASE_URL.toString();
 //这里根据自己项目接口的位置自行设定
-let baseURL = "http://1xx.1xx.1xx.1xx/hyr";
+let baseURL = "https://infs3202-942629ae.uqcloud.net/";
 if (process.env.NODE_ENV == "production") {
-  baseURL = "http://1xx.1xx.1xx.1xx/hyr";
+  baseURL = "https://infs3202-942629ae.uqcloud.net/";
 }
 instance.defaults.baseURL = baseURL; //baseURL用于自动切换本地环境接口和生产环境接口
 instance.defaults.headers.post["Content-Type"] ="application/x-www-form-urlencoded;charset=UTF-8";
