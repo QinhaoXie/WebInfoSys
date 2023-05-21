@@ -200,6 +200,7 @@
         $.get("https://infs3202-942629ae.uqcloud.net/lara/userlogout", function(data, status){
          alert("Data: " + data + "\nStatus: " + status);
          Cookies.remove("PHPSESSID");
+         Cookies.remove("laravel_session");
          
          window.location.href="https://infs3202-942629ae.uqcloud.net/vue";
         });
@@ -213,6 +214,13 @@
         this.showlogin=false;
         
       }
+      if(this.$cookies.isKey('laravel_session')){
+        this.showlogin=false;
+        console.log("laravel session")}else{
+          console.log("no laravel session");
+        };
+        
+      
       
     },
     data: () => ({

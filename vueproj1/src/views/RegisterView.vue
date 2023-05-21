@@ -185,7 +185,8 @@ export default {
                                   async:false,
                                   success:function(data){
                                   console.log(data);
-                                  }
+                                  },
+                                  error:function() { alert("error:email used or username used"); }
                                 })
               if(htmlobj.responseText=="register success"){
                 this.$router.push('/registersuccess');

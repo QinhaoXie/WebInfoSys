@@ -211,9 +211,13 @@ export default {
             //   // alert("Login Success");
             // window.location.href="https://infs3202-942629ae.uqcloud.net/vue";
             // }else{alert(data);}
+            
+            console.log(status);
             localStorage.setItem("data",data);
+            localStorage.setItem("profstatus",status);
             
           });
+          
           var result =JSON.parse(localStorage.getItem("data"));
           var list=[];
             list.push({name: "id",content: result[0].id});
@@ -224,6 +228,10 @@ export default {
               }else{list.push({name: "Email Verify",content: result[0].email_verified_at});}
             this.items=list;
             // this.infos.email=result[0].email;
+          // if(items.name==null){
+            // alert("Please login");
+            // setTimeout(window.location.href='https://infs3202-942629ae.uqcloud.net/vue/login',3);
+          // }
   const settings = {
 	async: true,
 	crossDomain: true,
