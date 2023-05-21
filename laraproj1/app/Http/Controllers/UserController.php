@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Livewire\Request as LivewireRequest;
 
+use function PHPUnit\Framework\isEmpty;
+
 class UserController extends Controller
 {
     //
@@ -31,10 +33,15 @@ class UserController extends Controller
     //       return redirect()->intended('/vue/');
     // }
     // return $request->input('username'); 
-$credentials = $request->all(['email', 'password']);
-       //  $credentials =[ 'name'=>$request->username,
+    $credentials = $request->all(['email', 'password'])
+    ->validate([
+                  'email' => ['required', 'email'],
+                  'password' => ['required'],
+              ]);
+    
+    //  $credentials =[ 'name'=>$request->username,
        // 'password'=>$request->password];
-    $name=$request->username;
+    $name=$request->email;
     $password=$request->password;
    //  $name='xqh123';
    // $password='xqh123'; 
@@ -45,11 +52,11 @@ $credentials = $request->all(['email', 'password']);
       // response()->cookies("session_id",$request->getSession()->getId(),11111111111111);
       // return $request->session_id;
        $cookie = $this->getCookie($token);
- 
-        return response()->json([
+      
+       return response()->json([
             'token' => $token,
             'user' => auth()->user(),
-      ])->withCookie($cookie);
+      ])->cookie("loginalready","true",1000);
 
       // session(['username' => $name]); 
       //       $n=$request->username;
@@ -102,6 +109,11 @@ $credentials = $request->all(['email', 'password']);
         ]);
        */
     // return "register success";
+    // if(!isEmpty(DB::table("users")
+    //   ->where("email",'=',$email)
+    //   ->get())){
+    //   return "email exist"; 
+    // };
     $User = new User();
     
     $User->name = $username;

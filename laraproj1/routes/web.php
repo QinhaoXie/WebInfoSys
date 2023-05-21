@@ -89,6 +89,7 @@ Route::get('/dash/coursecount', function () {
     ->groupByRaw("id")
     ->get();
 });
+ // ->middleware('Auth');
 
 
 
